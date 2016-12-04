@@ -3,6 +3,10 @@
 *.idea
 *.iml
 
+#gradle
+.gradle/
+gradle/
+
 #general
 *.class
 build/
