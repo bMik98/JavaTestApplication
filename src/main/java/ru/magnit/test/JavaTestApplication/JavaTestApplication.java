@@ -11,9 +11,9 @@ import java.io.File;
 import java.util.List;
 
 public class JavaTestApplication implements ProcessingApplication {
-    private final String fileName1 = "1.xml";
-    private final String fileName2 = "2.xml";
-    private final String xslFileName = "transform.xsl";
+    private final String fileName1 = "src/main/resources/1.xml";
+    private final String fileName2 = "src/main/resources/2.xml";
+    private final String xslFileName = "src/main/resources/transform.xsl";
     private final File file1;
     private final File file2;
     private final File xslFile;
@@ -21,9 +21,9 @@ public class JavaTestApplication implements ProcessingApplication {
     private int numberN;
 
     public JavaTestApplication() {
-        file1 = new File(locateFile(fileName1));
-        file2 = new File(locateFile(fileName2));
-        xslFile = new File(locateFile(xslFileName));
+        xslFile = new File(xslFileName);
+        file1 = new File(fileName1);
+        file2 = new File(fileName2);
     }
 
     @Override
@@ -47,16 +47,6 @@ public class JavaTestApplication implements ProcessingApplication {
             throw new IllegalArgumentException();
         }
         this.numberN = number;
-    }
-
-    private String locateFile(final String fileName) {
-        String result = "";
-        try {
-            result = getClass().getClassLoader().getResource(fileName).getFile();
-        } catch (NullPointerException e) {
-            System.err.println(String.format("File not found: %s", fileName));
-        }
-        return result;
     }
 
     private long sumOfField(List<Entry> entries) {
