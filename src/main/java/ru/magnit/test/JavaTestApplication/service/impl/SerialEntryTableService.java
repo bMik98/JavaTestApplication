@@ -1,7 +1,7 @@
 package ru.magnit.test.JavaTestApplication.service.impl;
 
 import ru.magnit.test.JavaTestApplication.entity.Entry;
-import ru.magnit.test.JavaTestApplication.property.DbConnectionProperties;
+import ru.magnit.test.JavaTestApplication.dao.util.ConnectionProperties;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class SerialEntryTableService extends AbstractTableService {
     private final int startEntryValue = 1;
     private int numberOfEntries;
 
-    public SerialEntryTableService(final DbConnectionProperties properties, final int numberOfEntries) {
+    public SerialEntryTableService(final ConnectionProperties properties, final int numberOfEntries) {
         super(properties);
         this.numberOfEntries = numberOfEntries;
     }

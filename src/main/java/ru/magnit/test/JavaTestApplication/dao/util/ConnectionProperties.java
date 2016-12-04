@@ -1,8 +1,8 @@
-package ru.magnit.test.JavaTestApplication.property;
+package ru.magnit.test.JavaTestApplication.dao.util;
 
 import java.util.Properties;
 
-public interface DbConnectionProperties {
+public interface ConnectionProperties {
     String buildUrl();
 
     String getDriverName();

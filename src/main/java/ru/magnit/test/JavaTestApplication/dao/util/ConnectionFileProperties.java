@@ -1,12 +1,10 @@
-package ru.magnit.test.JavaTestApplication.property.impl;
+package ru.magnit.test.JavaTestApplication.dao.util;
 
-import ru.magnit.test.JavaTestApplication.property.DbConnectionProperties;
-
-public class DbConnectionFileProperties extends FileProperties implements DbConnectionProperties {
+public class ConnectionFileProperties extends FileProperties implements ConnectionProperties {
     private String url;
     private String driverName;
 
-    public DbConnectionFileProperties(final String fileName) {
+    public ConnectionFileProperties(final String fileName) {
         super(fileName);
         url = getProperties().getProperty("url");
         getProperties().remove("url");

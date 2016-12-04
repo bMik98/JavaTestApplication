@@ -1,7 +1,7 @@
 package ru.magnit.test.JavaTestApplication;
 
 import ru.magnit.test.JavaTestApplication.entity.Entry;
-import ru.magnit.test.JavaTestApplication.property.DbConnectionProperties;
+import ru.magnit.test.JavaTestApplication.dao.util.ConnectionProperties;
 import ru.magnit.test.JavaTestApplication.service.TableService;
 import ru.magnit.test.JavaTestApplication.service.XmlService;
 import ru.magnit.test.JavaTestApplication.service.impl.EntryXmlService;
@@ -17,7 +17,7 @@ public class JavaTestApplication implements ProcessingApplication {
     private final File file1;
     private final File file2;
     private final File xslFile;
-    private DbConnectionProperties dbConnectionProperties;
+    private ConnectionProperties connectionProperties;
     private int numberN;
 
     public JavaTestApplication() {
@@ -28,7 +28,7 @@ public class JavaTestApplication implements ProcessingApplication {
 
     @Override
     public long run() {
-        TableService tableService = new SerialEntryTableService(dbConnectionProperties, numberN);
+        TableService tableService = new SerialEntryTableService(connectionProperties, numberN);
         tableService.clearAndPopulateTable();
         XmlService xmlService = new EntryXmlService();
         xmlService.saveToFile(tableService.getTableContent(), file1);
@@ -37,9 +37,8 @@ public class JavaTestApplication implements ProcessingApplication {
         return sumOfField(entries);
     }
 
-    @Override
-    public void setDbConnectionProperties(final DbConnectionProperties properties) {
-        this.dbConnectionProperties = properties;
+    public void setConnectionProperties(final ConnectionProperties properties) {
+        this.connectionProperties = properties;
     }
 
     @Override
@@ -51,7 +50,13 @@ public class JavaTestApplication implements ProcessingApplication {
     }
 
     private String locateFile(final String fileName) {
-        return getClass().getClassLoader().getResource(fileName).getFile();
+        String result = "";
+        try {
+            result = getClass().getClassLoader().getResource(fileName).getFile();
+        } catch (NullPointerException e) {
+            System.err.println(String.format("File not found: %s", fileName));
+        }
+        return result;
     }
 
     private long sumOfField(List<Entry> entries) {

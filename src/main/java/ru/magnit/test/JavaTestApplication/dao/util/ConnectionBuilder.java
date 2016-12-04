@@ -1,13 +1,11 @@
 package ru.magnit.test.JavaTestApplication.dao.util;
 
-import ru.magnit.test.JavaTestApplication.property.DbConnectionProperties;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionBuilder {
-    public static Connection build(final DbConnectionProperties properties) {
+    public static Connection build(final ConnectionProperties properties) {
         initJdbcDriver(properties.getDriverName());
         Connection connection;
         try {

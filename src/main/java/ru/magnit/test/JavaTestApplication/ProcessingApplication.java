@@ -1,11 +1,11 @@
 package ru.magnit.test.JavaTestApplication;
 
-import ru.magnit.test.JavaTestApplication.property.DbConnectionProperties;
+import ru.magnit.test.JavaTestApplication.dao.util.ConnectionProperties;
 
 public interface ProcessingApplication {
     long run();
 
-    void setDbConnectionProperties(DbConnectionProperties properties);
+    void setConnectionProperties(ConnectionProperties properties);
 
     void setNumber(int number);
 }
